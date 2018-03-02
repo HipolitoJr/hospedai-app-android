@@ -1,5 +1,6 @@
 package com.example.hipolito.hospedai.api
 
+import com.example.hipolito.hospedai.api.endpoints.LoginEndPoint
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -10,14 +11,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class APIService{
 
-    public val BASE_URL = "http://api.football-data.org/"
+    private val BASE_URL = "http://192.168.0.21:8000/api/v1/"
 
-    var retrofit: Retrofit? = null
-    //var interceptorFootballAPI: InterceptorFootballAPI? = null
+    private lateinit var retrofit: Retrofit
+    private lateinit var interceptorAPI: InterceptorAPI
+
+    public lateinit var loginEndPoint: LoginEndPoint
 
     constructor(TOKEN: String){
-        var Token = "Token " + TOKEN
-        val interceptorAPI = InterceptorAPI(Token)
+
+        interceptorAPI = InterceptorAPI("Token " + TOKEN)
 
         val builderCliente = OkHttpClient.Builder()
         builderCliente.addInterceptor(interceptorAPI)
@@ -29,5 +32,7 @@ class APIService{
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(cliente)
                 .build()
+
+        loginEndPoint = this.retrofit.create(LoginEndPoint::class.java)
     }
 }
