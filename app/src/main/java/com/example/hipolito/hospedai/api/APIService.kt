@@ -1,5 +1,6 @@
 package com.example.hipolito.hospedai.api
 
+import com.example.hipolito.hospedai.api.endpoints.CadastroEndPoint
 import com.example.hipolito.hospedai.api.endpoints.LoginEndPoint
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -11,12 +12,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class APIService{
 
-    private val BASE_URL = "http://192.168.0.21:8000/api/v1/"
+    private val BASE_URL = "http://10.0.20.66:8000/api/v1/"
 
     private lateinit var retrofit: Retrofit
     private lateinit var interceptorAPI: InterceptorAPI
 
-    public lateinit var loginEndPoint: LoginEndPoint
+    lateinit var loginEndPoint: LoginEndPoint
+    lateinit var cadastroEndPoint: CadastroEndPoint
 
     constructor(TOKEN: String){
 
@@ -34,5 +36,6 @@ class APIService{
                 .build()
 
         loginEndPoint = this.retrofit.create(LoginEndPoint::class.java)
+        cadastroEndPoint = this.retrofit.create(CadastroEndPoint::class.java)
     }
 }

@@ -12,11 +12,11 @@ class SecurityPreferences(context: Context) {
 
 
     fun saveString(key: String, value: String){
-        sharedPreferences.edit().putString(key, value)
+        sharedPreferences.edit().putString(key, value).apply()
     }
 
     fun getSavedString(key: String): String{
-        return sharedPreferences.getString(key, null)
+        return sharedPreferences.getString(key, "")
     }
 
     fun saveInt(key: String, value: Int){
@@ -44,7 +44,7 @@ class SecurityPreferences(context: Context) {
     }
 
     fun saveLong(key: String, value: Long){
-        sharedPreferences.edit().putLong(key, value)
+        sharedPreferences.edit().putLong(key, value).apply()
     }
 
     fun getSavedLong(key: String): Long{

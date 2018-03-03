@@ -59,6 +59,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <TextView
+            android:id="@+id/btnCadastrarLogin"
             android:text="Cadastre-se"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"

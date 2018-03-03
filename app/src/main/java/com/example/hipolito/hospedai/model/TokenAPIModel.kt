@@ -1,4 +1,4 @@
-package com.example.hipolito.hospedai.models
+package com.example.hipolito.hospedai.model
 
 import com.google.gson.annotations.SerializedName
 

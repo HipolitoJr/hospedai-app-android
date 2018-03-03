@@ -1,7 +1,7 @@
 package com.example.hipolito.hospedai.api.endpoints
 
-import com.example.hipolito.hospedai.models.TokenAPIModel
-import com.example.hipolito.hospedai.models.Usuario
+import com.example.hipolito.hospedai.model.TokenAPIModel
+import com.example.hipolito.hospedai.model.Usuario
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

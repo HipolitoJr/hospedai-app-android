@@ -1,13 +1,12 @@
-package com.example.hipolito.hospedai.models
-
-import com.google.gson.annotations.SerializedName
+package com.example.hipolito.hospedai.model
 
 /**
  * Created by hipolito on 27/02/18.
  */
 class Usuario(
-        var id: Long,
         var password: String,
         var username: String){
+
+    var id: Long = 0
 
 }
