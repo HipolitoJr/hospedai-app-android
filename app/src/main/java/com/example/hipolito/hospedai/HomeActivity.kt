@@ -23,6 +23,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun initComponents() {
         initNavigation()
+        setFragment(HoteisFragment())
     }
 
     private fun initNavigation() {
@@ -51,13 +52,18 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
-        var fragmentManager = supportFragmentManager
-        var ft = fragmentManager.beginTransaction()
-
-        ft.replace(R.id.flFragment, fragment)
-        ft.commit()
-
+        setFragment(fragment)
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun setFragment(fragment: Fragment){
+        if (fragment != null){
+            var fragmentManager = supportFragmentManager
+            var ft = fragmentManager.beginTransaction()
+
+            ft.replace(R.id.flFragment, fragment)
+            ft.commit()
+        }
     }
 }
