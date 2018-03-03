@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home_hospedagens"
+            android:title="Hospedagens" />
+        <item
+            android:id="@+id/nav_home_hospedes"
+            android:title="Hospedes" />
+        <item
+            android:id="@+id/nav_home_historico"
+            android:title="Historico" />
+        <item
+            android:id="@+id/nav_home_hoteis"
+            android:title="Meus Hoteis" />
+    </group>
+
+    <item android:title="Configurações">
+        <menu>
+            <item
+                android:id="@+id/nav_home_preferencias"
+                android:title="Preferências" />
+            <item
+                android:id="@+id/nav_home_logout"
+                android:title="Sair" />
+        </menu>
+    </item>
+
+</menu>
