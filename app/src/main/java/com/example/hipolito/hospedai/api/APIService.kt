@@ -1,8 +1,6 @@
 package com.example.hipolito.hospedai.api
 
-import com.example.hipolito.hospedai.api.endpoints.CadastroEndPoint
-import com.example.hipolito.hospedai.api.endpoints.HoteisEndPoint
-import com.example.hipolito.hospedai.api.endpoints.LoginEndPoint
+import com.example.hipolito.hospedai.api.endpoints.*
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,6 +19,8 @@ class APIService{
     lateinit var loginEndPoint: LoginEndPoint
     lateinit var cadastroEndPoint: CadastroEndPoint
     lateinit var hotelEndPoint: HoteisEndPoint
+    lateinit var hospedagemEndPoint: HospedagensEndPoint
+    lateinit var hospedeEndPoint: HospedeEndPoint
 
     constructor(TOKEN: String){
 
@@ -40,5 +40,7 @@ class APIService{
         loginEndPoint = this.retrofit.create(LoginEndPoint::class.java)
         cadastroEndPoint = this.retrofit.create(CadastroEndPoint::class.java)
         hotelEndPoint = this.retrofit.create(HoteisEndPoint::class.java)
+        hospedagemEndPoint = this.retrofit.create(HospedagensEndPoint::class.java)
+        hospedeEndPoint = this.retrofit.create(HospedeEndPoint::class.java)
     }
 }

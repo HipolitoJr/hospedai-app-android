@@ -20,7 +20,7 @@ class SecurityPreferences(context: Context) {
     }
 
     fun saveInt(key: String, value: Int){
-        sharedPreferences.edit().putInt(key, value)
+        sharedPreferences.edit().putInt(key, value).apply()
     }
 
     fun getSavedInt(key: String): Int {
@@ -28,7 +28,7 @@ class SecurityPreferences(context: Context) {
     }
 
     fun saveFloat(key: String, value: Float){
-        sharedPreferences.edit().putFloat(key, value)
+        sharedPreferences.edit().putFloat(key, value).apply()
     }
 
     fun getSavedFloat(key: String): Float{
@@ -36,7 +36,7 @@ class SecurityPreferences(context: Context) {
     }
 
     fun saveBoolean(key: String, value: Boolean){
-        sharedPreferences.edit().putBoolean(key, value)
+        sharedPreferences.edit().putBoolean(key, value).apply()
     }
 
     fun getSavedBoolean(key: String): Boolean{

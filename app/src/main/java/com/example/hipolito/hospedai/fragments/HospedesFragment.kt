@@ -1,8 +1,9 @@
 package com.example.hipolito.hospedai.fragments
 
+
 import android.app.Activity
-import android.content.Context
-import android.net.Uri
+import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -10,28 +11,30 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 
 import com.example.hipolito.hospedai.R
-import com.example.hipolito.hospedai.adapters.HospedagensRVAdapter
+import com.example.hipolito.hospedai.adapters.HospedesRVAdapter
+import com.example.hipolito.hospedai.adapters.HoteisRVAdapter
 import com.example.hipolito.hospedai.api.APIService
-import com.example.hipolito.hospedai.model.Hospedagem
-import com.example.hipolito.hospedai.model.Hotel
+import com.example.hipolito.hospedai.model.Hospede
 import com.example.hipolito.hospedai.util.HospedaiConstants
 import com.example.hipolito.hospedai.util.SecurityPreferences
-import kotlinx.android.synthetic.main.fragment_hospedagens.*
+import kotlinx.android.synthetic.main.fragment_hospedes.*
+import kotlinx.android.synthetic.main.fragment_hoteis.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HospedagensFragment : Fragment() {
+class HospedesFragment : Fragment() {
 
-    private lateinit var mView: View
     private lateinit var apiService: APIService
     private lateinit var securityPreferences: SecurityPreferences
+    private lateinit var progressLoadDialog: ProgressDialog
+    private lateinit var alertMsgDialog: AlertDialog.Builder
+    private lateinit var mView: View
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater!!.inflate(R.layout.fragment_hospedagens, container, false)
+        mView = inflater!!.inflate(R.layout.fragment_hospedes, container, false)
         initComponents()
 
         return mView
@@ -41,48 +44,48 @@ class HospedagensFragment : Fragment() {
         securityPreferences = SecurityPreferences(context)
         apiService = APIService(getToken())
 
-        getHospedagens()
+        getHospedes()
     }
 
-    private fun getHospedagens(){
-        val hospedagensCall = apiService.hospedagemEndPoint.getHospedagens(getHotelSelecionado())
+    private fun getHospedes(){
 
-        hospedagensCall.enqueue(object: Callback<MutableList<Hospedagem>>{
-            override fun onFailure(call: Call<MutableList<Hospedagem>>?, t: Throwable?) {
-                Toast.makeText(context, "Failure: " + t!!.message.toString(), Toast.LENGTH_SHORT).show()
+        val hospedesCall = apiService.hospedeEndPoint.getHospedes(getHotelSelecionado())
+
+        hospedesCall.enqueue(object: Callback<MutableList<Hospede>> {
+            override fun onFailure(call: Call<MutableList<Hospede>>?, t: Throwable?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
-            override fun onResponse(call: Call<MutableList<Hospedagem>>?, response: Response<MutableList<Hospedagem>>?) {
+            override fun onResponse(call: Call<MutableList<Hospede>>?, response: Response<MutableList<Hospede>>?) {
                 if (response!!.isSuccessful){
                     if (response.body().isNotEmpty()){
                         exibirLista(response.body())
-                    }else{
-                        Toast.makeText(context, "Sem Hospedagens!", Toast.LENGTH_SHORT).show()
                     }
                 }else{
-                    Toast.makeText(context, "Erro: " + response.code(), Toast.LENGTH_SHORT).show()
+
                 }
             }
         })
+
     }
 
-    private fun exibirLista(hospedagensList: MutableList<Hospedagem>){
-        val hospedagensRVAdapter = HospedagensRVAdapter(context, activity as AppCompatActivity, hospedagensList)
+    private fun exibirLista(hospedesList: MutableList<Hospede>?) {
+        val hospedesRVAdapter = HospedesRVAdapter(context, activity as AppCompatActivity, hospedesList!!)
 
-        rvHospedagensFragment.adapter = hospedagensRVAdapter
-
+        rvHospedesFragment.adapter = hospedesRVAdapter
         val linearLayoutManager = LinearLayoutManager(context as Activity, LinearLayoutManager.VERTICAL, false)
         linearLayoutManager.scrollToPosition(0)
 
-        rvHospedagensFragment.layoutManager = linearLayoutManager
-        rvHospedagensFragment.setHasFixedSize(true)
+        rvHospedesFragment.layoutManager = linearLayoutManager
+        rvHospedesFragment.setHasFixedSize(true)
     }
 
     private fun getHotelSelecionado(): Long{
         return securityPreferences.getSavedLong(HospedaiConstants.KEY.HOTEL_SELECIONADO)
     }
 
-    private fun getToken(): String{
+    private fun getToken(): String {
         return securityPreferences.getSavedString(HospedaiConstants.KEY.TOKEN_LOGADO)
     }
+
 }

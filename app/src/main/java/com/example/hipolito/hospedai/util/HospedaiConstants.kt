@@ -8,6 +8,7 @@ class HospedaiConstants private constructor(){
     object KEY{
         val TOKEN_LOGADO = "tokenLogado"
         val USUARIO_LOGADO = "usuarioLogado"
+        val HOTEL_SELECIONADO = "hotelSelecionado"
     }
 
 }

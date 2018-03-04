@@ -7,6 +7,8 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.example.hipolito.hospedai.fragments.HospedagensFragment
+import com.example.hipolito.hospedai.fragments.HospedesFragment
 import com.example.hipolito.hospedai.fragments.HoteisFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
@@ -49,6 +51,17 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_home_hoteis -> {
                 fragment = HoteisFragment()
+                title = "Meus Hoteis"
+            }
+
+            R.id.nav_home_hospedes -> {
+                fragment = HospedesFragment()
+                title = "Meus Hospedes"
+            }
+
+            R.id.nav_home_hospedagens -> {
+                fragment = HospedagensFragment()
+                title = "Hospedagens"
             }
         }
 
