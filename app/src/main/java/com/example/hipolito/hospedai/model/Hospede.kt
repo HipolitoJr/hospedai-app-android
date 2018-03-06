@@ -10,9 +10,10 @@ class Hospede(
         var cpf: String,
         var telefone: String,
         var email: String,
-        var endereco: String){
+        var endereco: String,
+        @SerializedName("qtd_hospedagens") var qtdHospedagens: Int = 0){
 
+    @SerializedName("id") var id = 0L
     @SerializedName("is_hospedado") var isHospedado = false
-    @SerializedName("qtd_hospedagens") var qtdHospedagens = 0
 
 }

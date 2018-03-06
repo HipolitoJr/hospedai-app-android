@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                     logarUsuario(response.body(), usuario)
                 }else{
                     progressDialog.hide()
-                    Toast.makeText(this@LoginActivity, "Erro: " + response.body().erro, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "Erro", Toast.LENGTH_SHORT).show()
                 }
             }
         })

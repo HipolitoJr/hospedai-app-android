@@ -53,10 +53,9 @@ class HospedagensRVAdapter(
 
         var hospedagem = hospedagens.get(position)
 
-        holder!!.txtNomeHospede.setText(hospedagem.hospede.nome)
+        holder!!.txtNomeHospede.setText(""+ hospedagem.hospede.nome)
         holder!!.txtDtEntrada.setText(hospedagem.dataCheckin)
         holder!!.txtValorDiaria.setText("R$ " + hospedagem.valorDebito.replace(".", ","))
-
 
     }
 

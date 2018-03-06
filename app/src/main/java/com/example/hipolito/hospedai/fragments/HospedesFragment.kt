@@ -60,7 +60,7 @@ class HospedesFragment : Fragment() {
 
         hospedesCall.enqueue(object: Callback<MutableList<Hospede>> {
             override fun onFailure(call: Call<MutableList<Hospede>>?, t: Throwable?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
 
             override fun onResponse(call: Call<MutableList<Hospede>>?, response: Response<MutableList<Hospede>>?) {

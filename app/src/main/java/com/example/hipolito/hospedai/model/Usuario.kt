@@ -8,5 +8,6 @@ class Usuario(
         var username: String){
 
     var id: Long = 0
+    lateinit var detail: String
 
 }
