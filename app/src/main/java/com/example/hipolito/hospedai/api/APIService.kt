@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class APIService{
 
-    private val BASE_URL = "http://192.168.0.21:8000/api/v1/"
+    private val BASE_URL = "http://192.168.100.30:8000/api/v1/"
 
     private lateinit var retrofit: Retrofit
     private lateinit var interceptorAPI: InterceptorAPI

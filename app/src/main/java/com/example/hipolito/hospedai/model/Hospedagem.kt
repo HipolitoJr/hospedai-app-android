@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  */
 class Hospedagem (
         @SerializedName("hospede") var hospede: Hospede,
-        @SerializedName("valor_debito") var valorDebito: String,
+        @SerializedName("valor_debito_atual") var valorDebito: String,
         @SerializedName("data_checkout") var dataCheckout: String,
         @SerializedName("data_checkin") var dataCheckin: String
     ) {

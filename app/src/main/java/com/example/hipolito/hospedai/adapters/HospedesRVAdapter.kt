@@ -41,7 +41,13 @@ class HospedesRVAdapter(
 
         holder!!.itemView.txtItemHospedeNome.setText(hospede.nome)
         holder!!.itemView.txtItemHospedeEmail.setText(hospede.email)
-        holder!!.itemView.txtItemHospedeTelefone.setText(hospede.telefone)
+        holder!!.itemView.txtItemHospedeQtdHosp.setText("" + hospede.qtdHospedagens + " HOSPEDAGENS")
+
+        if (hospede.isHospedado){
+            holder!!.itemView.ivItemHospedeStatus.setImageResource(R.drawable.ic_ativo)
+        }else{
+            holder!!.itemView.ivItemHospedeStatus.setImageResource(R.drawable.ic_inativo)
+        }
 
     }
 

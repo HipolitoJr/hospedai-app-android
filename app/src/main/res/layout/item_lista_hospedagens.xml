@@ -10,6 +10,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:padding="6dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,7 +23,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:src="@drawable/ic_user"
+                android:src="@drawable/ic_user_file"
                 android:layout_gravity="center"
                 android:layout_width="60dp"
                 android:layout_height="60dp" />
@@ -44,7 +45,6 @@
 
                 <TextView
                     android:id="@+id/txtItemHspdgNome"
-                    android:text="HIPOLITO"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:gravity="center"
@@ -54,7 +54,6 @@
 
                 <TextView
                     android:id="@+id/txtItemHspdgDtEntrada"
-                    android:text="Entrada: 24/02/2018"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
@@ -71,7 +70,6 @@
 
                 <TextView
                     android:id="@+id/txtItemHspdgValor"
-                    android:text="R$ "
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:gravity="center"

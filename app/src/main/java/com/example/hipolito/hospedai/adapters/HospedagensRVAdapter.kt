@@ -11,6 +11,9 @@ import com.example.hipolito.hospedai.HomeActivity
 import com.example.hipolito.hospedai.R
 import com.example.hipolito.hospedai.model.Hospedagem
 import kotlinx.android.synthetic.main.item_lista_hospedagens.view.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by hipolito on 04/03/18.
@@ -51,8 +54,9 @@ class HospedagensRVAdapter(
         var hospedagem = hospedagens.get(position)
 
         holder!!.txtNomeHospede.setText(hospedagem.hospede.nome)
-        holder!!.txtDtEntrada.setText(holder!!.txtDtEntrada.text.toString() + " " + hospedagem.dataCheckin)
-        holder!!.txtValorDiaria.setText("R$ " + hospedagem.valorDebito)
+        holder!!.txtDtEntrada.setText(hospedagem.dataCheckin)
+        holder!!.txtValorDiaria.setText("R$ " + hospedagem.valorDebito.replace(".", ","))
+
 
     }
 

@@ -26,7 +26,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabAddHospedagens"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/ic_note_add_white_24dp"
             android:layout_margin="16dp"
             android:layout_gravity="bottom|end"
             android:layout_width="wrap_content"

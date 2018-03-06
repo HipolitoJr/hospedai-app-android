@@ -1,6 +1,5 @@
 package com.example.hipolito.hospedai.fragments
 
-
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
@@ -101,7 +100,7 @@ class HospedesFragment : Fragment() {
     private fun exibirDialogAddHospede() {
         var dialog = AlertDialog.Builder(context)
 
-        var view = activity.layoutInflater.inflate(R.layout.dialog_add_hotel, mView as ViewGroup, false)
+        var view = activity.layoutInflater.inflate(R.layout.dialog_add_hospede, mView as ViewGroup, false)
 
         dialog.setTitle("Adicionar Hospede")
                 .setView(view)
