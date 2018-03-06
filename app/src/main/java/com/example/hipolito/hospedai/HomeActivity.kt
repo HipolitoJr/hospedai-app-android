@@ -7,13 +7,18 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.widget.Toast
 import com.example.hipolito.hospedai.fragments.HospedagensFragment
 import com.example.hipolito.hospedai.fragments.HospedesFragment
 import com.example.hipolito.hospedai.fragments.HoteisFragment
+import com.example.hipolito.hospedai.util.HospedaiConstants
+import com.example.hipolito.hospedai.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var securityPreferences: SecurityPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +29,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun initComponents() {
+        securityPreferences = SecurityPreferences(this)
         initNavigation()
-        setFragment(HoteisFragment())
+
+        redirecionaFragment()
     }
 
     private fun initNavigation() {
@@ -46,7 +53,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        lateinit var fragment: Fragment
+        var fragment: Fragment? = null
 
         when (item.itemId) {
             R.id.nav_home_hoteis -> {
@@ -65,9 +72,22 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
-        setFragment(fragment)
+        setFragment(fragment!!)
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun redirecionaFragment() {
+        if (getHotelSelecionado() != -1L){
+            setFragment(HospedagensFragment())
+        }else{
+            setFragment(HoteisFragment())
+        }
+
+    }
+
+    private fun getHotelSelecionado(): Long{
+        return securityPreferences.getSavedLong(HospedaiConstants.KEY.HOTEL_SELECIONADO)
     }
 
     private fun setFragment(fragment: Fragment){

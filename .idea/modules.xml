@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Hospedai.iml" filepath="$PROJECT_DIR$/Hospedai.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hospedai-app-android.iml" filepath="$PROJECT_DIR$/hospedai-app-android.iml" />
     </modules>
   </component>
 </project>
