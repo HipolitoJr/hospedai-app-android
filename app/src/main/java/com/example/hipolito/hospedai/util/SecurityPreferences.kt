@@ -10,7 +10,6 @@ class SecurityPreferences(context: Context) {
 
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences("hospedai", Context.MODE_PRIVATE)
 
-
     fun saveString(key: String, value: String){
         sharedPreferences.edit().putString(key, value).apply()
     }
@@ -49,6 +48,10 @@ class SecurityPreferences(context: Context) {
 
     fun getSavedLong(key: String): Long{
         return sharedPreferences.getLong(key, -1L)
+    }
+
+    fun limpar(){
+        sharedPreferences.edit().clear().commit()
     }
 
 }

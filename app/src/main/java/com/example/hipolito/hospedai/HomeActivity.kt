@@ -72,10 +72,17 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 fragment = HospedagensFragment()
                 title = "Hospedagens"
             }
+
             R.id.nav_home_historico -> {
                 fragment = HistoricoFragment()
                 title = "Historico"
             }
+
+            R.id.nav_home_logout -> {
+                securityPreferences.limpar()
+                finish()
+            }
+
         }
 
         setFragment(fragment!!)
