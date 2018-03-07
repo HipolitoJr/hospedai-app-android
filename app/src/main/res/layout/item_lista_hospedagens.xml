@@ -20,6 +20,7 @@
             android:layout_width="0dp"
             android:gravity="center"
             android:padding="4dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -32,9 +33,9 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -59,6 +60,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
+                <LinearLayout
+                    android:background="@android:color/darker_gray"
+                    android:layout_margin="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    android:id="@+id/txtItemHspdgValor"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccent"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -68,14 +86,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txtItemHspdgValor"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/ivItemHspdgCheck"
+                    android:src="@drawable/ic_checkout"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
 
             </LinearLayout>
 

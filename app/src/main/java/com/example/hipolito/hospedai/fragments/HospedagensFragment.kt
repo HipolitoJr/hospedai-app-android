@@ -116,7 +116,7 @@ class HospedagensFragment : Fragment() {
     }
 
     private fun exibirLista(hospedagensList: MutableList<Hospedagem>){
-        val hospedagensRVAdapter = HospedagensRVAdapter(context, activity as AppCompatActivity, hospedagensList)
+        val hospedagensRVAdapter = HospedagensRVAdapter(context, activity as AppCompatActivity, apiService, getHotelSelecionado(), hospedagensList)
 
         rvHospedagensFragment.adapter = hospedagensRVAdapter
 

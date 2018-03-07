@@ -7,10 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.example.hipolito.hospedai.HomeActivity
 import com.example.hipolito.hospedai.R
+import com.example.hipolito.hospedai.api.APIService
 import com.example.hipolito.hospedai.model.Hospedagem
+import com.example.hipolito.hospedai.model.Hotel
 import kotlinx.android.synthetic.main.item_lista_hospedagens.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,6 +27,8 @@ import java.util.*
 class HospedagensRVAdapter(
         var context: Context,
         var activity: AppCompatActivity,
+        var apiService: APIService,
+        var hotelSelecionado: Long,
         var hospedagens: MutableList<Hospedagem>
     ): RecyclerView.Adapter<HospedagensRVAdapter.ViewHolder>() {
 
@@ -56,6 +64,25 @@ class HospedagensRVAdapter(
         holder!!.txtNomeHospede.setText(""+ hospedagem.hospede.nome)
         holder!!.txtDtEntrada.setText(hospedagem.dataCheckin)
         holder!!.txtValorDiaria.setText("R$ " + hospedagem.valorDebito.replace(".", ","))
+
+        holder!!.itemView.ivItemHspdgCheck.setOnClickListener {
+            fazerCheckout(hospedagem)
+        }
+
+    }
+
+    private fun fazerCheckout(hospedagem: Hospedagem) {
+        var call = apiService.hospedagemEndPoint.checkoutHospedagem(hotelSelecionado, hospedagem.id)
+
+        call.enqueue(object: Callback<Hospedagem>{
+            override fun onFailure(call: Call<Hospedagem>?, t: Throwable?) {
+
+            }
+
+            override fun onResponse(call: Call<Hospedagem>?, response: Response<Hospedagem>?) {
+                
+            }
+        })
 
     }
 

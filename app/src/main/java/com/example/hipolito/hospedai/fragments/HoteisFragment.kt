@@ -97,10 +97,10 @@ class HoteisFragment : Fragment() {
 
             override fun onResponse(call: Call<Hotel>?, response: Response<Hotel>?) {
                 if (response!!.isSuccessful){
-                    Toast.makeText(context, "Ok. ID: " + response.body().id, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Adicionado com sucesso!", Toast.LENGTH_SHORT).show()
                     getHoteis()
                 }else{
-                    Toast.makeText(context, "Erro: " + response.code(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Erro: " + response.errorBody().string(), Toast.LENGTH_SHORT).show()
                     progressLoadDialog.hide()
                 }
             }

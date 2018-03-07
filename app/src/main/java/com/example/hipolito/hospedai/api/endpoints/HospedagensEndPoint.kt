@@ -18,4 +18,7 @@ interface HospedagensEndPoint {
     @POST("hoteis/{hotel_id}/hospedar/{hospede_id}/")
     fun postHospedagens(@Path("hotel_id") hotel_id: Long, @Path("hospede_id") hospede_id: Long, @Body hospedagem: Hospedagem): Call<Hospedagem>
 
+    @GET("hoteis/{hotel_id}/hospedagens/{hospedagem_id}/checkout/")
+    fun checkoutHospedagem(@Path("hotel_id") hotel_id: Long, @Path("hospedagem_id") hospedagem_id: Long): Call<Hospedagem>
+
 }
