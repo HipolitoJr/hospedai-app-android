@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class APIService{
 
-    private val BASE_URL = "http://192.168.0.21:8000/api/v1/"
+    private val BASE_URL = "http://10.0.50.216:8000/api/v1/"
 
     private lateinit var retrofit: Retrofit
     private lateinit var interceptorAPI: InterceptorAPI
@@ -21,6 +21,7 @@ class APIService{
     lateinit var hotelEndPoint: HoteisEndPoint
     lateinit var hospedagemEndPoint: HospedagensEndPoint
     lateinit var hospedeEndPoint: HospedeEndPoint
+    lateinit var historicoEndPoint: HistoricoEndPoint
 
     constructor(TOKEN: String){
 
@@ -42,5 +43,6 @@ class APIService{
         hotelEndPoint = this.retrofit.create(HoteisEndPoint::class.java)
         hospedagemEndPoint = this.retrofit.create(HospedagensEndPoint::class.java)
         hospedeEndPoint = this.retrofit.create(HospedeEndPoint::class.java)
+        historicoEndPoint = this.retrofit.create(HistoricoEndPoint::class.java)
     }
 }

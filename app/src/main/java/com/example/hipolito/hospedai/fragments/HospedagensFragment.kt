@@ -37,7 +37,6 @@ class HospedagensFragment : Fragment() {
     private lateinit var apiService: APIService
     private lateinit var securityPreferences: SecurityPreferences
     private lateinit var hospedesList: List<Hospede>
-    private lateinit var hospedeSelecionado: Hospede
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater!!.inflate(R.layout.fragment_hospedagens, container, false)

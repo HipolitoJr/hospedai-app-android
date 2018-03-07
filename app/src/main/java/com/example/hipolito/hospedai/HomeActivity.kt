@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.hipolito.hospedai.fragments.HistoricoFragment
 import com.example.hipolito.hospedai.fragments.HospedagensFragment
 import com.example.hipolito.hospedai.fragments.HospedesFragment
 import com.example.hipolito.hospedai.fragments.HoteisFragment
@@ -29,6 +30,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun initComponents() {
+        title = "Hospedai"
         securityPreferences = SecurityPreferences(this)
         initNavigation()
 
@@ -69,6 +71,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_home_hospedagens -> {
                 fragment = HospedagensFragment()
                 title = "Hospedagens"
+            }
+            R.id.nav_home_historico -> {
+                fragment = HistoricoFragment()
+                title = "Historico"
             }
         }
 
