@@ -1,5 +1,6 @@
 package com.example.hipolito.hospedai
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -81,11 +82,14 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_home_logout -> {
                 securityPreferences.limpar()
                 finish()
+                startActivity(Intent(this, LoginActivity::class.java))
             }
 
         }
 
-        setFragment(fragment!!)
+        if (fragment != null)
+            setFragment(fragment!!)
+
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }

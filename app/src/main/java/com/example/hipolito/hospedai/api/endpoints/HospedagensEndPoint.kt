@@ -1,6 +1,7 @@
 package com.example.hipolito.hospedai.api.endpoints
 
 import com.example.hipolito.hospedai.model.Hospedagem
+import com.example.hipolito.hospedai.model.Hospede
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -19,6 +20,6 @@ interface HospedagensEndPoint {
     fun postHospedagens(@Path("hotel_id") hotel_id: Long, @Path("hospede_id") hospede_id: Long, @Body hospedagem: Hospedagem): Call<Hospedagem>
 
     @POST("hoteis/{hotel_id}/hospedagens/{hospedagem_id}/checkout/")
-    fun checkoutHospedagem(@Path("hotel_id") hotel_id: Long, @Path("hospedagem_id") hospedagem_id: Long): Call<Hospedagem>
+    fun checkoutHospedagem(@Path("hotel_id") hotel_id: Long, @Path("hospedagem_id") hospedagem_id: Long, @Body hospede: Hospede): Call<Hospedagem>
 
 }

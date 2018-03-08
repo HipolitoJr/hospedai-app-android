@@ -80,7 +80,7 @@ class HospedagensRVAdapter(
     }
 
     private fun fazerCheckout(hospedagem: Hospedagem) {
-        var call = apiService.hospedagemEndPoint.checkoutHospedagem(hotelSelecionado, hospedagem.id)
+        var call = apiService.hospedagemEndPoint.checkoutHospedagem(hotelSelecionado, hospedagem.id, hospedagem.hospede)
 
         call.enqueue(object: Callback<Hospedagem>{
             override fun onFailure(call: Call<Hospedagem>?, t: Throwable?) {
