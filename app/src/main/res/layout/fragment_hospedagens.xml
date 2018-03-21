@@ -14,15 +14,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/txtErroHospedagens"
-            android:visibility="gone"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textColor="@android:color/black"
-            android:text="Você não possui hospedagens! \n Clique em + para começar"
+        <LinearLayout
+            android:id="@+id/layoutErroHospedagens"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:src="@drawable/not_found"
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <TextView
+                android:id="@+id/txtErroHospedagens"
+                android:text="Oops! No momento, voce nao possui hospedagens! \n Para começar aperte em +"
+                android:textSize="12dp"
+                android:textColor="@android:color/black"
+                android:padding="6dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabAddHospedagens"

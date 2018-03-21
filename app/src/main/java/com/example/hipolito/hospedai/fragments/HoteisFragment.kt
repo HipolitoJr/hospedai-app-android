@@ -70,6 +70,7 @@ class HoteisFragment : Fragment() {
             override fun onResponse(call: Call<MutableList<Hotel>>?, response: Response<MutableList<Hotel>>?) {
                 if (response!!.isSuccessful){
                     if (response.body().isNotEmpty()) {
+                        layoutErroHoteis.visibility = View.GONE
                         exibirLista(response.body())
                     }else{
                         exibirMsgAlerta()
@@ -109,11 +110,7 @@ class HoteisFragment : Fragment() {
     }
 
     private fun exibirMsgAlerta() {
-        val snackbar = Snackbar.make(mView, "Cadastre seu primeiro Hotel!", Snackbar.LENGTH_LONG)
-        snackbar.setAction("Ok", null)
-        snackbar.show()
-
-        txtErroHoteis.visibility = View.VISIBLE
+        layoutErroHoteis.visibility = View.VISIBLE
     }
 
     private fun exibirLista(hoteisList: MutableList<Hotel>?) {

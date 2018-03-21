@@ -9,5 +9,6 @@ class Usuario(
 
     var id: Long = 0
     lateinit var detail: String
+    lateinit var email: String
 
 }

@@ -8,18 +8,23 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
-import com.example.hipolito.hospedai.fragments.HistoricoFragment
-import com.example.hipolito.hospedai.fragments.HospedagensFragment
-import com.example.hipolito.hospedai.fragments.HospedesFragment
-import com.example.hipolito.hospedai.fragments.HoteisFragment
+import com.example.hipolito.hospedai.api.APIService
+import com.example.hipolito.hospedai.fragments.*
+import com.example.hipolito.hospedai.model.Usuario
 import com.example.hipolito.hospedai.util.HospedaiConstants
 import com.example.hipolito.hospedai.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
+import org.w3c.dom.Text
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private lateinit var apiService: APIService
     private lateinit var securityPreferences: SecurityPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +38,35 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun initComponents() {
         title = "Hospedai"
         securityPreferences = SecurityPreferences(this)
+        apiService = APIService(getToken())
         initNavigation()
+        getUsuario()
 
         redirecionaFragment()
+    }
+
+    private fun getUsuario(){
+        val usuarioCall = apiService.usuarioEndPoint.getUsuario(getUsuarioLogado())
+
+        usuarioCall.enqueue(object: Callback<Usuario>{
+            override fun onResponse(call: Call<Usuario>?, response: Response<Usuario>?) {
+                if(response!!.isSuccessful){
+                    setValuesLogado(response.body()!!)
+                }
+            }
+
+            override fun onFailure(call: Call<Usuario>?, t: Throwable?) {
+                Toast.makeText(this@HomeActivity, "Falha na conexão", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+    }
+
+    private fun setValuesLogado(usuario: Usuario) {
+        val txtUsuario = findViewById<TextView>(R.id.txtHomeUsuario)
+        val txtEmail = findViewById<TextView>(R.id.txtHomeEmail)
+        txtUsuario.setText(usuario.username)
+        txtEmail.setText(usuario.email)
     }
 
     private fun initNavigation() {
@@ -79,6 +110,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 title = "Historico"
             }
 
+            R.id.nav_home_preferencias -> {
+                fragment = PreferenciasFragment()
+            }
+
             R.id.nav_home_logout -> {
                 securityPreferences.limpar()
                 finish()
@@ -105,6 +140,14 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun getHotelSelecionado(): Long{
         return securityPreferences.getSavedLong(HospedaiConstants.KEY.HOTEL_SELECIONADO)
+    }
+
+    private fun getToken(): String{
+        return securityPreferences.getSavedString(HospedaiConstants.KEY.TOKEN_LOGADO)
+    }
+
+    private fun getUsuarioLogado(): Long{
+        return securityPreferences.getSavedLong(HospedaiConstants.KEY.USUARIO_LOGADO)
     }
 
     private fun setFragment(fragment: Fragment){

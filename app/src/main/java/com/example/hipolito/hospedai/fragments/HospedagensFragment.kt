@@ -2,6 +2,7 @@ package com.example.hipolito.hospedai.fragments
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -36,6 +37,7 @@ class HospedagensFragment : Fragment() {
     private lateinit var mView: View
     private lateinit var apiService: APIService
     private lateinit var securityPreferences: SecurityPreferences
+    private lateinit var progressDialog: ProgressDialog
     private lateinit var hospedesList: List<Hospede>
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,10 +52,13 @@ class HospedagensFragment : Fragment() {
         apiService = APIService(getToken())
         getHospedes()
 
+        progressDialog = initLoadDialog()
+
         mView.fabAddHospedagens.setOnClickListener({
             exibirDialogAddHospedagem()
         })
 
+        progressDialog.show()
         getHospedagens()
     }
 
@@ -62,19 +67,22 @@ class HospedagensFragment : Fragment() {
 
         hospedagensCall.enqueue(object: Callback<MutableList<Hospedagem>>{
             override fun onFailure(call: Call<MutableList<Hospedagem>>?, t: Throwable?) {
-                Toast.makeText(context, "Failure: " + t!!.message.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Falha na conexão", Toast.LENGTH_SHORT).show()
+                progressDialog.hide()
             }
 
             override fun onResponse(call: Call<MutableList<Hospedagem>>?, response: Response<MutableList<Hospedagem>>?) {
                 if (response!!.isSuccessful){
                     if (response.body().isNotEmpty()){
                         exibirLista(response.body())
+                        layoutErroHospedagens.visibility = View.GONE
                     }else{
-                        Toast.makeText(context, "Sem Hospedagens!", Toast.LENGTH_SHORT).show()
+                        layoutErroHospedagens.visibility = View.VISIBLE
                     }
                 }else{
                     Toast.makeText(context, "Erro: " + response.code(), Toast.LENGTH_SHORT).show()
                 }
+                progressDialog.hide()
             }
         })
     }
@@ -86,14 +94,16 @@ class HospedagensFragment : Fragment() {
             override fun onResponse(call: Call<Hospedagem>?, response: Response<Hospedagem>?) {
                 if (response!!.isSuccessful){
                     Toast.makeText(context, "Adicionado com Sucesso!", Toast.LENGTH_LONG).show()
-                    getHospedes()
+                    getHospedagens()
                 }else{
-                    Toast.makeText(context, "Erro" + response.errorBody().string(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Erro: " + response.code(), Toast.LENGTH_LONG).show()
+                    progressDialog.hide()
                 }
             }
 
             override fun onFailure(call: Call<Hospedagem>?, t: Throwable?) {
-                Toast.makeText(context, "Failure", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Falha na conexão", Toast.LENGTH_LONG).show()
+                progressDialog.hide()
             }
         })
     }
@@ -138,8 +148,8 @@ class HospedagensFragment : Fragment() {
                     val posItem = view.spnAddHspdgHospede.selectedItemPosition
                     var hospede = hospedesList.get(posItem)
                     val hospedagem = Hospedagem(hospede)
-                    Toast.makeText(context, "id: " + hospede.id, Toast.LENGTH_LONG).show()
 
+                    progressDialog.show()
                     postHospedagem(hospede, hospedagem)
                 })
                 .setNegativeButton("Cancelar", null)
@@ -158,6 +168,12 @@ class HospedagensFragment : Fragment() {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
         view.spnAddHspdgHospede.adapter = arrayAdapter
 
+    }
+
+    private fun initLoadDialog(): ProgressDialog {
+        val pgDialog = ProgressDialog(context)
+        pgDialog.setMessage("Aguarde...")
+        return pgDialog
     }
 
     private fun getHotelSelecionado(): Long{

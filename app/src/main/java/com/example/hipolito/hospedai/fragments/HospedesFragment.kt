@@ -51,6 +51,9 @@ class HospedesFragment : Fragment() {
             exibirDialogAddHospede()
         })
 
+        progressLoadDialog = initLoadDialog()
+
+        progressLoadDialog.show()
         getHospedes()
     }
 
@@ -60,17 +63,21 @@ class HospedesFragment : Fragment() {
 
         hospedesCall.enqueue(object: Callback<MutableList<Hospede>> {
             override fun onFailure(call: Call<MutableList<Hospede>>?, t: Throwable?) {
-
+                Toast.makeText(context, "Falha na conexão", Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<MutableList<Hospede>>?, response: Response<MutableList<Hospede>>?) {
                 if (response!!.isSuccessful){
                     if (response.body().isNotEmpty()){
                         exibirLista(response.body())
+                        layoutErroHospedes.visibility = View.GONE
+                    }else{
+                        layoutErroHospedes.visibility = View.VISIBLE
                     }
                 }else{
-
+                    Toast.makeText(context, "Erro: " + response.code(), Toast.LENGTH_SHORT).show()
                 }
+                progressLoadDialog.hide();
             }
         })
 
@@ -82,7 +89,7 @@ class HospedesFragment : Fragment() {
 
         postHospedes.enqueue(object: Callback<Hospede>{
             override fun onFailure(call: Call<Hospede>?, t: Throwable?) {
-                Toast.makeText(context, "Failure: " + t!!.message.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Falha na conexão", Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<Hospede>?, response: Response<Hospede>?) {
@@ -94,7 +101,6 @@ class HospedesFragment : Fragment() {
                 }
             }
         })
-
     }
 
     private fun exibirDialogAddHospede() {
@@ -114,12 +120,18 @@ class HospedesFragment : Fragment() {
 
                     var novoHospede = Hospede(nome, cpf, telefone, email, endereco)
 
-                    //progressLoadDialog.show()
+                    progressLoadDialog.show()
                     postHospede(novoHospede)
                 })
                 .setNegativeButton("Cancelar", null)
                 .show()
 
+    }
+
+    private fun initLoadDialog(): ProgressDialog {
+        val pgDialog = ProgressDialog(context)
+        pgDialog.setMessage("Aguarde...")
+        return pgDialog
     }
 
     private fun exibirLista(hospedesList: MutableList<Hospede>?) {

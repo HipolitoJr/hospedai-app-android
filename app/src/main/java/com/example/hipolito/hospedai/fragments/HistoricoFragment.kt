@@ -2,6 +2,7 @@ package com.example.hipolito.hospedai.fragments
 
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -34,6 +35,7 @@ class HistoricoFragment : Fragment() {
     private lateinit var mView: View
     private lateinit var apiService: APIService
     private lateinit var securityPreferences: SecurityPreferences
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater!!.inflate(R.layout.fragment_historico, container, false)
@@ -45,7 +47,11 @@ class HistoricoFragment : Fragment() {
     private fun initComponents() {
         securityPreferences = SecurityPreferences(context)
         apiService = APIService(getToken())
+        progressDialog = initLoadDialog()
+
+        progressDialog.show()
         getHistorico(getHotelSelecionado())
+
 
     }
 
@@ -55,6 +61,7 @@ class HistoricoFragment : Fragment() {
         historicoCall.enqueue(object: Callback<MutableList<Hospedagem>>{
             override fun onFailure(call: Call<MutableList<Hospedagem>>?, t: Throwable?) {
                 Toast.makeText(context, "Falha de conexão", Toast.LENGTH_SHORT).show()
+                progressDialog.hide()
             }
 
             override fun onResponse(call: Call<MutableList<Hospedagem>>?, response: Response<MutableList<Hospedagem>>?) {
@@ -63,6 +70,7 @@ class HistoricoFragment : Fragment() {
                 }else{
                     Toast.makeText(context, "" + response.errorBody().string(), Toast.LENGTH_SHORT).show()
                 }
+                progressDialog.hide()
             }
         })
     }
@@ -77,6 +85,12 @@ class HistoricoFragment : Fragment() {
 
         rvHistoricoFragment.layoutManager = linearLayoutManager
         rvHistoricoFragment.setHasFixedSize(true)
+    }
+
+    private fun initLoadDialog(): ProgressDialog {
+        val pgDialog = ProgressDialog(context)
+        pgDialog.setMessage("Aguarde...")
+        return pgDialog
     }
 
     private fun getHotelSelecionado(): Long{

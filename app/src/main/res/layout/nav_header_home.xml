@@ -18,16 +18,17 @@
         app:srcCompat="@mipmap/ic_user" />
 
     <TextView
+        android:id="@+id/txtHomeUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Android Studio"
+        android:text="hipolito"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtHomeEmail"
+        android:text="hipolito@gmail.com"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="android.studio@android.com" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

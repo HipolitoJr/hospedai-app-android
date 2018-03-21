@@ -13,6 +13,6 @@ class Hotel(
 
     @SerializedName("id") var id: Long = 0
     @SerializedName("usuario_id") var usuarioId: Long = 0
-    @SerializedName("usuario") var usuario: Long = 0
+    var usuario: Long = 0
 
 }

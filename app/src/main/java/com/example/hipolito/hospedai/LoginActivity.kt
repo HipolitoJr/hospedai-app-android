@@ -63,11 +63,10 @@ class LoginActivity : AppCompatActivity() {
                     logarUsuario(response.body(), usuario)
                 }else{
                     progressDialog.hide()
-                    Toast.makeText(this@LoginActivity, "Erro", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "" + response.errorBody().string(), Toast.LENGTH_SHORT).show()
                 }
             }
         })
-
     }
 
     private fun criarUsuario(): Usuario{
