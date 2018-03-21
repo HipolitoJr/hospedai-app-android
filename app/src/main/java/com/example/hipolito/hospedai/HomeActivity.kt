@@ -92,22 +92,18 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_home_hoteis -> {
                 fragment = HoteisFragment()
-                title = "Meus Hoteis"
             }
 
             R.id.nav_home_hospedes -> {
                 fragment = HospedesFragment()
-                title = "Meus Hospedes"
             }
 
             R.id.nav_home_hospedagens -> {
                 fragment = HospedagensFragment()
-                title = "Hospedagens"
             }
 
             R.id.nav_home_historico -> {
                 fragment = HistoricoFragment()
-                title = "Historico"
             }
 
             R.id.nav_home_preferencias -> {
@@ -119,7 +115,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 finish()
                 startActivity(Intent(this, LoginActivity::class.java))
             }
-
         }
 
         if (fragment != null)
@@ -155,7 +150,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             var fragmentManager = supportFragmentManager
             var ft = fragmentManager.beginTransaction()
 
-            ft.replace(R.id.flFragment, fragment)
+            if(getHotelSelecionado() != -1L)
+                ft.replace(R.id.flFragment, fragment)
+            else
+                ft.replace(R.id.flFragment, HoteisFragment())
+
             ft.commit()
         }
     }

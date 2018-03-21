@@ -51,8 +51,6 @@ class HistoricoFragment : Fragment() {
 
         progressDialog.show()
         getHistorico(getHotelSelecionado())
-
-
     }
 
     private fun getHistorico(hotelId: Long) {
@@ -66,7 +64,12 @@ class HistoricoFragment : Fragment() {
 
             override fun onResponse(call: Call<MutableList<Hospedagem>>?, response: Response<MutableList<Hospedagem>>?) {
                 if (response!!.isSuccessful){
-                    exibirLista(response.body())
+                    if (response.body().isNotEmpty()){
+                        exibirLista(response.body())
+                        layoutErroHistorico.visibility = View.GONE
+                    }else{
+                        layoutErroHistorico.visibility = View.VISIBLE
+                    }
                 }else{
                     Toast.makeText(context, "" + response.errorBody().string(), Toast.LENGTH_SHORT).show()
                 }

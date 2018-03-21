@@ -47,7 +47,7 @@
             <TextView
                 android:id="@+id/txtPreferencesNomeHotel"
                 android:layout_margin="4dp"
-                android:text="POUSADA TAMANDUA S.A"
+                android:text="----------------"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_width="match_parent"
@@ -85,7 +85,7 @@
             <TextView
                 android:id="@+id/txtPreferencesDiaria"
                 android:layout_margin="4dp"
-                android:text="R$ 75,00"
+                android:text="R$ -- --"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_width="match_parent"
@@ -123,7 +123,7 @@
             <TextView
                 android:id="@+id/txtPreferencesTelefone"
                 android:layout_margin="4dp"
-                android:text="(86) 3222-1220"
+                android:text="(--) ---- - ----"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_width="match_parent"
@@ -162,7 +162,7 @@
             <TextView
                 android:id="@+id/txtPreferencesEndereco"
                 android:layout_margin="4dp"
-                android:text="Rua Prof Alceu Brandao, 3080"
+                android:text="----------------"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_width="match_parent"
